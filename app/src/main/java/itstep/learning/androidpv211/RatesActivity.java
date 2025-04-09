@@ -41,6 +41,7 @@ public class RatesActivity extends AppCompatActivity {
     private final List<NbuRate> nbuRates = new ArrayList<>();
     private NbuRateAdapter nbuRateAdapter;
     private RecyclerView rvContainer;
+    private TextView tvDate;
 
 
     @Override
@@ -81,7 +82,7 @@ public class RatesActivity extends AppCompatActivity {
 
             // в зависимости от ширины экрана можем делать разные гриды
 
-            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 3);
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
             //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             rvContainer.setLayoutManager(layoutManager);
             nbuRateAdapter = new NbuRateAdapter(nbuRates);
@@ -102,6 +103,8 @@ public class RatesActivity extends AppCompatActivity {
                 return onFilterChange(s);
             }
         });
+
+        tvDate = findViewById(R.id.rates_tv_date);
     }
 
     private boolean onFilterChange(String s){
@@ -139,6 +142,14 @@ public class RatesActivity extends AppCompatActivity {
         catch (JSONException ex) {
             Log.d("parseNbuResponse", "JSONExceptionn" + ex.getMessage());
         }
+
+
+        runOnUiThread(() -> {
+            if (!nbuRates.isEmpty()) {
+                String dateStr = NbuRate.dateFormat.format(nbuRates.get(0).getExchangeDate());
+                tvDate.setText("Курс на " + dateStr);
+            }
+        });
     }
 
     private String loadRates(){

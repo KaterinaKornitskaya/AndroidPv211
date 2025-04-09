@@ -24,6 +24,16 @@
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="100dp"/>-->
 
+    <TextView
+        android:id="@+id/rates_tv_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="italic"
+        android:textColor="@color/rates_tv_fg"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"
+        />
 
     <SearchView
         android:id="@+id/rates_sv_filter"

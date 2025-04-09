@@ -32,9 +32,23 @@ public class NbuRateViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void showData(){
+//        tvTxt.setText(nbuRate.getTxt());
+//        tvCc.setText(nbuRate.getCc());
+//        tvRate.setText(String.valueOf(nbuRate.getRate()));
+
+        String cc = nbuRate.getCc();
+        double rate = nbuRate.getRate();
+
         tvTxt.setText(nbuRate.getTxt());
-        tvCc.setText(nbuRate.getCc());
-        tvRate.setText(String.valueOf(nbuRate.getRate()));
+        tvCc.setText(cc);
+
+// Прямий курс
+        String direct = String.format("1 %s = %.2f UAH", cc, rate);
+
+// Зворотній курс
+        String reverse = String.format("1 UAH = %.2f %s", 1.0 / rate, cc);
+
+        tvRate.setText(direct + "\n" + reverse);
     }
 }
 

@@ -29,7 +29,7 @@ public class NbuRate {
         catch (ParseException ex) {
             throw new JSONException(ex.getMessage());
         }
-        return res;
+return res;
     }
 
     public int getR030() {
