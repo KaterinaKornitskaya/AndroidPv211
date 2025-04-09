@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="calc_btn">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:elevation">5dp</item>
+        <item name="android:translationZ">2dp</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+
+
+    <style name="calc_btn_func" parent="calc_btn">
+        <item name="android:background">@drawable/calc_btn_func</item>
+        <item name="android:textColor">@color/calc_tv_result</item>
+    </style>
+
+    <style name="calc_btn_digit" parent="calc_btn">
+        <item name="android:background">@drawable/calc_btn_digit</item>
+        <item name="android:textColor">@color/calc_tv_result</item>
+    </style>
+
+    <style name="calc_btn_equal" parent="calc_btn">
+        <item name="android:background">@drawable/calc_btn_equal</item>
+        <item name="android:textColor">@color/calc_tv_equal</item>
+    </style>
+</resources>
+
+<!--
+android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/calc_btn_func"
+                android:elevation="6dp"
+                android:translationZ="8dp"
+                android:text="%"
+                android:textColor="@color/calc_tv_result"
+                app:backgroundTint="@null"
+-->
