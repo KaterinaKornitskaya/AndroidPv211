@@ -159,12 +159,12 @@
         >
 
         <ImageView
-            android:id="@+id/anim_v_dz"
+            android:id="@+id/anim_v_ring"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/main_layout_bg"
             android:src="@android:drawable/ic_popup_reminder"
+            android:tint="@color/main_layout_bg"
             />
 
         <TextView

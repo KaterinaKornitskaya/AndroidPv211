@@ -16,6 +16,7 @@ public class AnimActivity extends AppCompatActivity {
     Animation rotateAnimation;
     Animation rotate2Animation;
     Animation scaleAnimation;
+    Animation ringAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,16 @@ public class AnimActivity extends AppCompatActivity {
         scaleAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
         findViewById(R.id.anim_v_scale).setOnClickListener(
                 v -> v.startAnimation(scaleAnimation)
+        );
+
+        scaleAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
+        findViewById(R.id.anim_v_scale).setOnClickListener(
+                v -> v.startAnimation(scaleAnimation)
+        );
+
+        ringAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_ring);
+        findViewById(R.id.anim_v_ring).setOnClickListener(
+                v -> v.startAnimation(ringAnimation)
         );
     }
 }
