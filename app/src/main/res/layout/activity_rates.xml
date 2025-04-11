@@ -40,6 +40,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rates_rv_container"
         android:layout_width="match_parent"

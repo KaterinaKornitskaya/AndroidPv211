@@ -36,6 +36,7 @@ import itstep.learning.androidpv211.orm.NbuRate;
 public class RatesActivity extends AppCompatActivity {
 
     private static final String nbuRatesUrl = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
+    //private static final String nbuRatesUrl = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=YYYYMMDD&json";
 //    private TextView  tvContainer;
     private ExecutorService pool;
     private final List<NbuRate> nbuRates = new ArrayList<>();
@@ -58,7 +59,8 @@ public class RatesActivity extends AppCompatActivity {
                     systemBars.left,
                     systemBars.top,
                     systemBars.right,
-                    Math.max(systemBars.bottom,imeBars.bottom) );
+                    Math.max(systemBars.bottom,imeBars.bottom)
+            );
 
             return insets;
         });
@@ -110,7 +112,13 @@ public class RatesActivity extends AppCompatActivity {
     private boolean onFilterChange(String s){
         Log.d("onFilterChange", s);
         nbuRateAdapter.setNbuRates(nbuRates.stream()
-                .filter(r -> r.getCc().toUpperCase().contains(s.toUpperCase()))
+                .filter(r ->
+                        // фільтруємо скорочення - типу USD
+                        r.getCc().toUpperCase().contains(s.toUpperCase())
+                        // фільтруємо назву - типу долар
+                        || r.getTxt().toUpperCase().contains(s.toUpperCase())
+                )
+
                 .collect(Collectors.toList())
         );
         return true;
@@ -153,47 +161,7 @@ public class RatesActivity extends AppCompatActivity {
     }
 
     private String loadRates(){
-        try{
-            URL url = new URL(nbuRatesUrl);
-            InputStream urlStream = url.openStream();  // GET-request
-            ByteArrayOutputStream byteBuilder = new ByteArrayOutputStream();
-            byte[] buffer = new byte[8192];
-            int len;
-            while( (len = urlStream.read(buffer)) >0 ){
-                byteBuilder.write(buffer, 0, len);
-            }
-            String charsetName = StandardCharsets.UTF_8.name();
-            String data = byteBuilder.toString(charsetName);
-
-            urlStream.close();
-
-            //runOnUiThread(()->tvContainer.setText(data));
-            return data;
-
-        }
-        catch(MalformedURLException ex){
-            Log.d("loadRates", "MalformedURLException" + ex.getMessage());
-        }
-        catch (IOException ex) {
-            Log.d("loadRates", "IOException" + ex.getMessage());
-        }
-        return null;
-
-        // android.os.NetworkOnMainThreadException -
-        // всі запити до мережі мають бути в окремих потоках.
-
-        // java.lang.SecurityException:
-        // Permission denied (missing INTERNET permission?)
-        // Багато дії в Android вимагає дозволів, зокрема Інтернет.
-        // Дозволи декларуються у маніфесті
-        // <uses-permission android:name="android.permission.INTERNET"/>
-
-        // android.view.ViewRootImpl$CalledFromWrongThreadException:
-        // Only the original thread that created a view hierarchy
-        // can touch its views.
-        // Для роботи з елементами UI необхідно повернути
-        // управління до основного UI, для уього треба метод runOnUiThread()
-
+       return Services.fetchUrl(nbuRatesUrl);
     }
 
     @Override

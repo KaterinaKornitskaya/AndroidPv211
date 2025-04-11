@@ -20,4 +20,6 @@
     <color name="rates_tv_fg">#3F51B5</color>
     <!-- endregion -->
 
+    <color name="chat_tv_fg">#009688</color>
+
 </resources>
